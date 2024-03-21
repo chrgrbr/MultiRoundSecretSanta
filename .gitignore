@@ -1,0 +1,6 @@
+.vscode/
+deprecated/
+credentials.json
+mail_contacts.json
+token.json
+*pyc
