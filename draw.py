@@ -1,7 +1,7 @@
 import random
 import yaml
 import json
-from send import send_email, move_email_to_archive
+from mail_utils import send_email, move_email_to_archive
 
 
 MAX_ATTEMPTS = 20
