@@ -25,7 +25,7 @@ def send_email(recipent, subject, body, from_email="derkahlehorst@gmail.com"):
     
 def move_email_to_archive(email_id):
     try:
-        message = service.users().messages().modify(userId="me", id=email_id, body={"removeLabelIds": ["SENT"], "addLabelIds": ["Label_4322346357244942836"]}).execute()
+        message = service.users().messages().modify(userId="me", id=email_id, body={"addLabelIds": ["Label_4322346357244942836"]}).execute()
         return True, message
     except HttpError as error:
         return False, error
