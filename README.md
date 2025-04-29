@@ -1,4 +1,4 @@
-# Secret Santa Draw
+# Multi-Round Secret Santa Draw
 
 A Python tool to organize multi-round Secret Santa draws with customizable constraints, exclusions, and email notifications.
 
@@ -55,7 +55,7 @@ text
 - `--gmail_sender`  
    GMail account, default is environment variable `SENDER_MAIL`
 
-- `--gmail_password` 
+- `--gmail_password`  
   GMail account password, default is environment variable `SENDER_PW`
 
 - `--debug`  
