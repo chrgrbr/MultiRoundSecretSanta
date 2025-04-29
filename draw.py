@@ -10,8 +10,6 @@ import time
 import json
 import argparse
 
-
-
 def load_config(yaml_path):
     with open(yaml_path, 'r') as f:
         data = yaml.safe_load(f)
@@ -161,7 +159,6 @@ def generate_summary(all_pairings):
 
 
 def run_draw():
-
     DRAW_ID = hashlib.md5(str(time.time()).encode()).hexdigest()[:8]
     SENDER_MAIL = args.gmail_sender
     SENDER_PW = args.gmail_password  #might have to be an "app password" for Gmail
