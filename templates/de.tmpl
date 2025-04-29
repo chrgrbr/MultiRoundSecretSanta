@@ -1,0 +1,51 @@
+<html>
+<head>
+    <style>
+        body {{ font-family: Arial, sans-serif; }}
+        .container {{
+            max-width: 500px;
+            margin: 20px auto;
+            border: 2px solid #2e8b57;
+            border-radius: 10px;
+            padding: 20px;
+            background: #f0fff0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }}
+        h2 {{ color: #000000; }}
+        ul {{ list-style-type: none; padding: 0; }}
+        li {{
+            background: #fff8dc;
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 5px solid #2e8b57;
+            border-radius: 4px;
+        }}
+        .draw-id {{
+            color: #888;
+            font-style: italic;
+            font-size: 0.9em;
+            margin-top: 20px;
+            display: block;
+            text-align: right;
+        }}
+        .footer {{
+            text-align: center;
+            font-size: 0.95em;
+            margin-top: 20px;
+            color: #555;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hey {name}! </h2>
+            <p>Hier sind deine Wichtelaufträge für {year}:</p>
+            <ul>
+                {assignments}
+            </ul>
+            <p>Beste automatisierte Grüße,</p>
+            <p class="footer">✨ Dein {sender} ✨</p>
+            <span class="draw-id">Draw ID: {draw_id}</span>
+            </div>
+        </body>
+</html>
