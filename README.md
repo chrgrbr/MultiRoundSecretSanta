@@ -73,15 +73,15 @@ Save generated emails and summary to the `debug/` folder instead of sending emai
 
 This will generate emails which are saved in `debug/`, and send a test mail only to Alice (if user exists in contact list). It will also generate a summary:
 ```
-Summary Draw [d377941f]:
-Participant         Round 1 (50€/$)     Round 2 (30€/$)     
+Summary Draw [677a590c]:
+Participant         Round 1 (50$)       Round 2 (30$)       
 ------------------------------------------------------------
-Alice               Bob                 David               
-Bob                 David               Emil                
-Casper              Alice               Florence            
-David               Casper              Alice               
-Emil                -                   Bob                 
-Florence            -                   Casper 
+Alice               Casper              David               
+Bob                 Alice               Casper              
+Casper              David               Bob                 
+David               Bob                 Alice               
+Emil                -                   Florence            
+Florence            -                   Emil      
 ```
 
 ---
