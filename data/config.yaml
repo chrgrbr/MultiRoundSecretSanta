@@ -1,0 +1,16 @@
+rounds:
+  - participants: [Alice, Bob, Casper, David]
+    exclusions:
+    budget: 50$
+  - participants: [Alice, Bob, Casper, David, Emil, Florence]
+    exclusions:
+      Casper: [Emil]
+      Emil: [Casper]
+      David: [Florence]
+      Florence: [David]
+    budget: 30$
+email:
+  subject: "Family Secret Santa"
+  sender: "Secret Santa Bot"
+  language: "en"
+year: 2025
