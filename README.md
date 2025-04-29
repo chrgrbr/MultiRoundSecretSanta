@@ -46,9 +46,7 @@ A Python tool to organize multi-round Secret Santa draws with customizable const
 
 Run the draw with:
 
-python secret_santa.py
-
-text
+`python secret_santa.py --gmail_sender you@gmail.com --gmail_password your_app_password`
 
 ### Options
 
