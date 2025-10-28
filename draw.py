@@ -76,8 +76,8 @@ def run_draw():
     SENDER_PW = args.gmail_password  #might have to be an "app password" for Gmail
     
     # Load configuration and contacts
-    config = load_config('data/config.yaml')
-    mail_adresses = load_mail_contacts('data/contact_information.json')
+    config = load_config(os.path.join(args.config_folder, 'config.yaml'))
+    mail_adresses = load_mail_contacts(os.path.join(args.config_folder, 'contact_information.json'))
     
     # Initialize handlers
     prevent_reciprocal = config.get('matching', {}).get('prevent_reciprocal_pairs', True)
@@ -121,6 +121,7 @@ def run_draw():
         
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run the Secret Santa draw.")
+    parser.add_argument('--config_folder','-cf', type=str, help="Path to configuration folder", default="./example_data")
     parser.add_argument('--debug', action='store_true', help="Run in debug mode.")
     parser.add_argument('--debug_email_user', type=str, help="Debug Mail. Enter User Mail shall be sent to.", default=None)
     parser.add_argument('--gmail_sender', type=str, help="Gmail Sender Mail.", default=os.getenv("SENDER_MAIL"))
