@@ -15,7 +15,7 @@ A Python tool to organize multi-round Secret Santa draws with customizable const
 - Sends emails via SMTP (Gmail example included).
 
 <p align="center">
-  <img src="example_config/example_mail.png" alt="Secret Santa 2025" width="30%">
+  <img src="example_config/example_mail.png" alt="Secret Santa 2025" width="50%">
 </p>
 
 ---
