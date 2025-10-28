@@ -14,3 +14,5 @@ email:
   sender: "Secret Santa Bot"
   language: "en"
 year: 2025
+matching:
+  prevent_reciprocal_pairs: true
