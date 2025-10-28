@@ -50,6 +50,9 @@ Run the draw with:
 
 ### Options
 
+- `--config` `-cf`
+  Path to folder with config files. Default is `example_config` 
+
 - `--gmail_sender`  
    GMail account, default is environment variable `SECRET_SANTA_SENDER_MAIL`
 
