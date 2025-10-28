@@ -51,10 +51,10 @@ Run the draw with:
 ### Options
 
 - `--gmail_sender`  
-   GMail account, default is environment variable `SENDER_MAIL`
+   GMail account, default is environment variable `SECRET_SANTA_SENDER_MAIL`
 
 - `--gmail_password`  
-  GMail account password, default is environment variable `SENDER_PW`
+  GMail account password, default is environment variable `SECRET_SANTA_SENDER_PW`
 
 - `--debug`  
 Save generated emails and summary to the `debug/` folder instead of sending emails.
