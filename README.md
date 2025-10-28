@@ -94,6 +94,7 @@ Florence            -                   Bob
 - The draw ID helps track and verify each draw session.
 - Avoid bidirectional draws by default; disable with code flag if desired.
 - Want to change the style/language of your email? Just edit the files in `templates` and specify your chosen template in the `config.yaml`
+- Next Feature: Backtracking with deterministic solution
 
 ---
 

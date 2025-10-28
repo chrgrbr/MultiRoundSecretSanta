@@ -9,6 +9,9 @@ rounds:
       David: [Florence]
       Florence: [David]
     budget: 30$
+  - participants: [Alice, Casper, Florence, David, George, Hannah]
+    exclusions:
+    budget: 10$
 email:
   subject: "Family Secret Santa"
   sender: "Secret Santa Bot"
@@ -16,3 +19,4 @@ email:
 year: 2025
 matching:
   prevent_reciprocal_pairs: true
+  max_attempts: 42

@@ -38,7 +38,7 @@ def generate_emails(all_pairings, config, draw_id):
         for name, assignments in emails.items()
     }
 
-def generate_summary(all_pairings, config):
+def generate_summary(all_pairings, num_attempt, config):
     """Thank you perplexity for the help"""
     lines = []
     # Summary header: number of rounds, unique participants and reciprocal-pair setting
@@ -48,7 +48,7 @@ def generate_summary(all_pairings, config):
         participants.update(round_data['pairing'].keys())
     num_participants = len(participants)
     prevent_reciprocal = config.get('matching', {}).get('prevent_reciprocal_pairs', True)
-    lines.append(f"Rounds: {num_rounds} | Participants: {num_participants} | Prevent reciprocal pairs: {prevent_reciprocal}")
+    lines.append(f"Rounds: {num_rounds} | Participants: {num_participants} | Prevent reciprocal pairs: {prevent_reciprocal} | Attempts needed: {num_attempt}")
     participants = sorted(participants)
     
     col_width = 20 
@@ -91,7 +91,8 @@ def run_draw():
     email_handler = EmailHandler(config)
     
     # Generate pairings and emails
-    all_pairings = matcher.generate_pairings(config['rounds'])
+    max_attempts = config.get('matching', {}).get('max_attempts', 50)
+    all_pairings, num_attempt = matcher.generate_pairings(config['rounds'], max_attempts=max_attempts)
     emails = generate_emails(all_pairings, config, DRAW_ID)
     
     if args.debug:
@@ -107,7 +108,7 @@ def run_draw():
                 emails[args.debug_email_user]
             )
         # Save summary as text file
-        summary = generate_summary(all_pairings, config)
+        summary = generate_summary(all_pairings, num_attempt, config)
         with open("debug/summary.txt", "w") as f:
             f.write(summary)
         print(f"\nSummary Draw [{DRAW_ID}]:\n{summary}")
