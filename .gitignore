@@ -1,6 +1,7 @@
 deprecated/
 data/
 debug/*
+configs/
 .vscode/
 .DS_Store
 
