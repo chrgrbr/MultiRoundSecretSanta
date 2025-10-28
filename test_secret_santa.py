@@ -145,5 +145,31 @@ class TestDrawRandomness(unittest.TestCase):
             "Draw results are not random; all draws produced the same result."
         )
 
+    def test_no_repeat_receivers_across_rounds(self):
+        """Ensure that a giver never gets the same receiver across rounds"""
+        participants = ['Alice', 'Bob', 'Charlie', 'David']
+        config = {
+            'rounds': [
+                {'participants': participants, 'exclusions': {}, 'budget': '50'},
+                {'participants': participants, 'exclusions': {}, 'budget': '30'},
+            ]
+        }
+
+        # Run multiple times to reduce flakiness
+        for _ in range(100):
+            matcher = SecretSantaMatcher()
+            pairings = matcher.generate_pairings(config['rounds'])
+            # Build mapping giver -> list of receivers across rounds
+            receiver_history = {}
+            for round_data in pairings:
+                for giver, receiver in round_data['pairing'].items():
+                    receiver_history.setdefault(giver, []).append(receiver)
+
+            for giver, receivers in receiver_history.items():
+                self.assertEqual(
+                    len(receivers), len(set(receivers)),
+                    f"Giver {giver} received the same recipient in multiple rounds: {receivers}"
+                )
+
 if __name__ == '__main__':
     unittest.main()
