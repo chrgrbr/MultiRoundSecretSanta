@@ -16,13 +16,14 @@ class TestSecretSantaMatcher(unittest.TestCase):
     
     def test_no_self_assignment(self):
         """Test that no one is assigned to give a gift to themselves"""
-        matcher = SecretSantaMatcher()
-        pairings = matcher.generate_pairings(self.basic_config['rounds'])
-        
-        for round_data in pairings:
-            for giver, receiver in round_data['pairing'].items():
-                self.assertNotEqual(giver, receiver, 
-                    f"Person {giver} was assigned to give to themselves")
+        # Run multiple draws to catch flaky failures from randomness
+        for _ in range(100):
+            matcher = SecretSantaMatcher()
+            pairings = matcher.generate_pairings(self.basic_config['rounds'])
+            for round_data in pairings:
+                for giver, receiver in round_data['pairing'].items():
+                    self.assertNotEqual(giver, receiver,
+                        f"Person {giver} was assigned to give to themselves")
     
     def test_respect_exclusions(self):
         """Test that exclusions are respected in assignments"""
@@ -33,33 +34,33 @@ class TestSecretSantaMatcher(unittest.TestCase):
                 'budget': '50'
             }]
         }
-        
-        matcher = SecretSantaMatcher()
-        pairings = matcher.generate_pairings(config['rounds'])
-        
-        # Check Alice isn't giving to Bob
-        self.assertNotEqual(
-            pairings[0]['pairing'].get('Alice'), 
-            'Bob',
-            "Alice was assigned to Bob despite exclusion"
-        )
+        # Run multiple draws to ensure exclusions are always respected
+        for _ in range(250):
+            matcher = SecretSantaMatcher()
+            pairings = matcher.generate_pairings(config['rounds'])
+            # Check Alice isn't giving to Bob
+            self.assertNotEqual(
+                pairings[0]['pairing'].get('Alice'), 
+                'Bob',
+                "Alice was assigned to Bob despite exclusion"
+            )
     
     def test_prevent_reciprocal_pairs(self):
         """Test that reciprocal pairs are prevented when enabled"""
-        matcher = SecretSantaMatcher(prevent_reciprocal_pairs=True)
-        pairings = matcher.generate_pairings(self.basic_config['rounds'])
-        
-        # Convert pairings to set of tuples for easier checking
-        pairs = {(giver, receiver) 
-                for round_data in pairings 
-                for giver, receiver in round_data['pairing'].items()}
-        
-        # Check for reciprocal pairs
-        for giver, receiver in pairs:
-            self.assertFalse(
-                (receiver, giver) in pairs,
-                f"Reciprocal pair found: {giver}->{receiver} and {receiver}->{giver}"
-            )
+        # Run multiple draws to ensure reciprocal pairs are never produced
+        for _ in range(250):
+            matcher = SecretSantaMatcher(prevent_reciprocal_pairs=True)
+            pairings = matcher.generate_pairings(self.basic_config['rounds'])
+            # Convert pairings to set of tuples for easier checking
+            pairs = {(giver, receiver)
+                    for round_data in pairings
+                    for giver, receiver in round_data['pairing'].items()}
+            # Check for reciprocal pairs
+            for giver, receiver in pairs:
+                self.assertFalse(
+                    (receiver, giver) in pairs,
+                    f"Reciprocal pair found: {giver}->{receiver} and {receiver}->{giver}"
+                )
 
 class TestEmailGeneration(unittest.TestCase):
     def setUp(self):
