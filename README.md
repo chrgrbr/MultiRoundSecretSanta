@@ -14,6 +14,59 @@ A Python tool to organize multi-round Secret Santa draws with customizable const
 - Debug mode to save emails and summary locally.
 - Sends emails via SMTP (Gmail example included).
 
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            border: 2px solid #2e8b57;
+            border-radius: 10px;
+            padding: 20px;
+            background: #f0fff0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 { color: #000000; }
+        ul { list-style-type: none; padding: 0; }
+        li {
+            background: #fff8dc;
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 5px solid #2e8b57;
+            border-radius: 4px;
+        }
+        .draw-id {
+            color: #888;
+            font-style: italic;
+            font-size: 0.9em;
+            margin-top: 20px;
+            display: block;
+            text-align: right;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.95em;
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hello Alice!</h2>
+        <p>Here are your Secret Santa assignments for 2025:</p>
+        <ul>
+            <li>🎁 Round 1: <strong>Bob</strong> (Budget: 50$)</li><li>🎁 Round 2: <strong>Emil</strong> (Budget: 30$)</li><li>🎁 Round 3: <strong>Florence</strong> (Budget: 10$)</li>
+        </ul>
+        <p>Festively compiled by your friendly neighborhood bot,</p>
+        <p class="footer">✨ Your Secret Santa Bot ✨</p>
+        <span class="draw-id">Draw ID: 306789b9</span>
+    </div>
+</body>
+</html>
+
+
 ---
 
 ## Requirements
@@ -74,18 +127,18 @@ Save generated emails and summary to the `debug/` folder instead of sending emai
 This will generate emails which are saved in `debug/`, and send a test mail only to Alice (if user exists in contact list). It will also generate a summary:
 
 ```
-Summary Draw [01ec1fdb]:
-Rounds: 3 | Participants: 8 | Prevent reciprocal pairs: True | Attempts needed: 2
+Summary Draw [306789b9]:
+Rounds: 3 | Participants: 8 | Prevent reciprocal pairs: True | Attempts needed: 3
 Participant         Round 1 (50$)       Round 2 (30$)       Round 3 (10$)       
 --------------------------------------------------------------------------------
-Alice               David               Emil                Hannah              
-Bob                 Alice               Florence            -                   
-Casper              Bob                 Alice               George              
-David               Casper              Bob                 Florence            
+Alice               Bob                 Emil                Florence            
+Bob                 Casper              Florence            -                   
+Casper              David               Alice               George              
+David               Alice               Bob                 Hannah              
 Emil                -                   David               -                   
-Florence            -                   Casper              Alice               
-George              -                   -                   David               
-Hannah              -                   -                   Casper   
+Florence            -                   Casper              David               
+George              -                   -                   Alice               
+Hannah              -                   -                   Casper      
 ```
 
 ---
