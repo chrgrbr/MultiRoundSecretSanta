@@ -1,5 +1,5 @@
 deprecated/
-schatt_data
+data/
 debug/*
 .vscode/
 .DS_Store
