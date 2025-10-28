@@ -71,8 +71,8 @@ Save generated emails and summary to the `debug/` folder instead of sending emai
 
 `python draw.py --debug --debug_email_user Alice`
 
-
 This will generate emails which are saved in `debug/`, and send a test mail only to Alice (if user exists in contact list). It will also generate a summary:
+
 ```
 Summary Draw [01ec1fdb]:
 Rounds: 3 | Participants: 8 | Prevent reciprocal pairs: True | Attempts needed: 2
