@@ -38,11 +38,17 @@ def generate_emails(all_pairings, config, draw_id):
         for name, assignments in emails.items()
     }
 
-def generate_summary(all_pairings):
+def generate_summary(all_pairings, config):
     """Thank you perplexity for the help"""
+    lines = []
+    # Summary header: number of rounds, unique participants and reciprocal-pair setting
+    num_rounds = len(all_pairings)
     participants = set()
     for round_data in all_pairings:
         participants.update(round_data['pairing'].keys())
+    num_participants = len(participants)
+    prevent_reciprocal = config.get('matching', {}).get('prevent_reciprocal_pairs', True)
+    lines.append(f"Rounds: {num_rounds} | Participants: {num_participants} | Prevent reciprocal pairs: {prevent_reciprocal}")
     participants = sorted(participants)
     
     col_width = 20 
@@ -51,7 +57,7 @@ def generate_summary(all_pairings):
     for round_num, round_data in enumerate(all_pairings, 1):
         budget = round_data['budget']
         header += f"Round {round_num} ({budget})".ljust(col_width)
-    lines = [header]
+    lines.append(header)
     lines.append("-" * len(header))
     
     # Prepare rows
@@ -101,10 +107,10 @@ def run_draw():
                 emails[args.debug_email_user]
             )
         # Save summary as text file
-        summary = generate_summary(all_pairings)
+        summary = generate_summary(all_pairings, config)
         with open("debug/summary.txt", "w") as f:
             f.write(summary)
-        print(f"Summary Draw [{DRAW_ID}]:\n{summary}")
+        print(f"\nSummary Draw [{DRAW_ID}]:\n{summary}")
         print("\nDebug files created.")
     else:
         print("Draw ID:", DRAW_ID)
@@ -120,7 +126,7 @@ def run_draw():
         
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run the Secret Santa draw.")
-    parser.add_argument('--config_folder','-cf', type=str, help="Path to configuration folder", default="./example_data")
+    parser.add_argument('--config_folder','-cf', type=str, help="Path to configuration folder", default="example_config")
     parser.add_argument('--debug', action='store_true', help="Run in debug mode.")
     parser.add_argument('--debug_email_user', type=str, help="Debug Mail. Enter User Mail shall be sent to.", default=None)
     parser.add_argument('--gmail_sender', type=str, help="Gmail Sender Mail.", default=os.getenv("SECRET_SANTA_SENDER_MAIL"))

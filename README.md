@@ -28,11 +28,11 @@ A Python tool to organize multi-round Secret Santa draws with customizable const
 
 1. **Configuration**
 
-   Edit `data/config.yaml` to define rounds, participants, budgets, exclusions, and language.
+   Edit `example_config/config.yaml` to define rounds, participants, budgets, exclusions, language and the option to exclude reciprocal pairs.
 
 2. **Mail Contacts**
 
-   Prepare `data/contact_information.json` with participant names and their email addresses.
+   Prepare `example_config/contact_information.json` with participant names and their email addresses.
 
 3. **Email Credentials**
 
@@ -46,7 +46,7 @@ A Python tool to organize multi-round Secret Santa draws with customizable const
 
 Run the draw with:
 
-`python secret_santa.py --gmail_sender you@gmail.com --gmail_password your_app_password`
+`python draw.py --gmail_sender you@gmail.com --gmail_password your_app_password`
 
 ### Options
 
@@ -69,20 +69,21 @@ Save generated emails and summary to the `debug/` folder instead of sending emai
 
 ## Example Test Run / Debug
 
-`python secret_santa.py --debug --debug_email_user Alice`
+`python draw.py --debug --debug_email_user Alice`
 
 
 This will generate emails which are saved in `debug/`, and send a test mail only to Alice (if user exists in contact list). It will also generate a summary:
 ```
-Summary Draw [677a590c]:
+Summary Draw [56fed392]:
+Rounds: 2 | Participants: 6 | Prevent reciprocal pairs: True
 Participant         Round 1 (50$)       Round 2 (30$)       
 ------------------------------------------------------------
-Alice               Casper              David               
-Bob                 Alice               Casper              
-Casper              David               Bob                 
-David               Bob                 Alice               
-Emil                -                   Florence            
-Florence            -                   Emil      
+Alice               Casper              Emil                
+Bob                 David               Alice               
+Casper              Bob                 Florence            
+David               Alice               Casper              
+Emil                -                   David               
+Florence            -                   Bob     
 ```
 
 ---
