@@ -105,25 +105,39 @@ def generate_emails(all_pairings, config, draw_id):
     silly_round_string = "Round" if config['email'].get('language', 'en') else "Runde"
     
 
+    total_rounds = len(all_pairings)
     for round_num, round_data in enumerate(all_pairings, 1):
         pairing = round_data['pairing']
         budget = round_data['budget']
         
         for giver in pairing:
-            emails[giver].append(
-                f"{silly_round_string} {round_num}: <strong>{pairing[giver]}</strong> (Budget: {budget})"
-            )
+            if total_rounds == 1:
+                assignment_text = f"<strong>{pairing[giver]}</strong>"
+            else:
+                assignment_text = f"{silly_round_string} {round_num}: <strong>{pairing[giver]}</strong>"
+            if budget:  
+                assignment_text += f" (Budget: {budget})"
+            emails[giver].append(assignment_text)
     
     html_emails = {}
     for name, assignments in emails.items():
         template = load_template(template_path)
         assignments_html = ''.join(f'<li>🎁 {assignment}</li>' for assignment in assignments)
+        
+        # Prepare the assignment text based on language and number of rounds
+        is_english = config['email'].get('language', 'en') == 'en'
+        if is_english:
+            assignment_text = "is your Secret Santa assignment" if total_rounds == 1 else "are your Secret Santa assignments"
+        else:
+            assignment_text = "ist dein Wichtelauftrag" if total_rounds == 1 else "sind deine Wichtelaufträge"
+            
         html_emails[name] = template.format(
             name=name,
             year=config['year'],
             assignments=assignments_html,
             sender=config['email']['sender'],
-            draw_id=draw_id
+            draw_id=draw_id,
+            assignment_text=assignment_text
         )
     return html_emails
 
