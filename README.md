@@ -14,58 +14,9 @@ A Python tool to organize multi-round Secret Santa draws with customizable const
 - Debug mode to save emails and summary locally.
 - Sends emails via SMTP (Gmail example included).
 
-<html>
-<head>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .container {
-            max-width: 500px;
-            margin: 20px auto;
-            border: 2px solid #2e8b57;
-            border-radius: 10px;
-            padding: 20px;
-            background: #f0fff0;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h2 { color: #000000; }
-        ul { list-style-type: none; padding: 0; }
-        li {
-            background: #fff8dc;
-            margin: 10px 0;
-            padding: 10px;
-            border-left: 5px solid #2e8b57;
-            border-radius: 4px;
-        }
-        .draw-id {
-            color: #888;
-            font-style: italic;
-            font-size: 0.9em;
-            margin-top: 20px;
-            display: block;
-            text-align: right;
-        }
-        .footer {
-            text-align: center;
-            font-size: 0.95em;
-            margin-top: 20px;
-            color: #555;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Hello Alice!</h2>
-        <p>Here are your Secret Santa assignments for 2025:</p>
-        <ul>
-            <li>🎁 Round 1: <strong>Bob</strong> (Budget: 50$)</li><li>🎁 Round 2: <strong>Emil</strong> (Budget: 30$)</li><li>🎁 Round 3: <strong>Florence</strong> (Budget: 10$)</li>
-        </ul>
-        <p>Festively compiled by your friendly neighborhood bot,</p>
-        <p class="footer">✨ Your Secret Santa Bot ✨</p>
-        <span class="draw-id">Draw ID: 306789b9</span>
-    </div>
-</body>
-</html>
-
+<p align="center">
+  <img src="example_config/example_mail.png" alt="Secret Santa 2025" width="30%">
+</p>
 
 ---
 
