@@ -1,6 +1,6 @@
 # 🎄 Multi-Round Secret Santa Draw 🎁
 
-A Python tool to organize multi-round Secret Santa draws with customizable constraints, exclusions, and email notifications.
+A Python tool to organize multi-round Secret Santa draws with customizable constraints, exclusions, and email notifications while preventing to drawing the same recipent twice in muliple gifting rounds.
 
 ---
 
