@@ -39,20 +39,26 @@ class SecretSantaMatcher:
         for perm in permutations(participants):
             valid_pairing = True
             pairing = list(zip(participants, perm))
-            
+            pairing_set = set(pairing)
+
             for giver, receiver in pairing:
                 # Check all pairing rules
+                # Also check for reciprocal pairs inside the same candidate pairing
+                reciprocal_in_current = (receiver, giver) in pairing_set
+                reciprocal_in_history = (receiver, giver) in self.pair_history
+
                 is_invalid = (
                     giver == receiver or                     # Can't give to self
                     receiver in exclusion_map[giver] or      # Respect exclusions
                     receiver in self.history[giver] or       # No repeat receivers across rounds
                     (self.prevent_reciprocal_pairs and      # Optional: prevent reciprocal pairs
-                     (receiver, giver) in self.pair_history)
+                     (reciprocal_in_current or reciprocal_in_history))
                 )
+
                 if is_invalid:
                     valid_pairing = False
                     break
-            
+
             if valid_pairing:
                 valid.append(pairing)
         
