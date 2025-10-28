@@ -1,4 +1,5 @@
 from email.mime.text import MIMEText
+from email.policy import SMTP
 import smtplib
 from localization import Translations
 
@@ -39,7 +40,7 @@ class EmailHandler:
     
     def send_email(self, sender_email, app_password, recipient_email, html_body):
         """Sends an email using SMTP"""
-        msg = MIMEText(html_body, 'html')
+        msg = MIMEText(html_body, 'html', policy=SMTP)
         msg['Subject'] = self.config['email']['subject']
         msg['From'] = self.config['email']['sender']
         msg['To'] = recipient_email

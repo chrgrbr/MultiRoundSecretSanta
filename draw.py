@@ -116,7 +116,6 @@ def run_draw():
                 mail_adresses[name], 
                 content
             )
-    
     print("Draw completed.")
         
 if __name__ == "__main__":
@@ -124,8 +123,7 @@ if __name__ == "__main__":
     parser.add_argument('--config_folder','-cf', type=str, help="Path to configuration folder", default="./example_data")
     parser.add_argument('--debug', action='store_true', help="Run in debug mode.")
     parser.add_argument('--debug_email_user', type=str, help="Debug Mail. Enter User Mail shall be sent to.", default=None)
-    parser.add_argument('--gmail_sender', type=str, help="Gmail Sender Mail.", default=os.getenv("SENDER_MAIL"))
-    parser.add_argument('--gmail_password', type=str, help="Gmail Sender Password.", default=os.getenv("SENDER_PW"))
+    parser.add_argument('--gmail_sender', type=str, help="Gmail Sender Mail.", default=os.getenv("SECRET_SANTA_SENDER_MAIL"))
+    parser.add_argument('--gmail_password', type=str, help="Gmail Sender Password.", default=os.getenv("SECRET_SANTA_SENDER_PW"))
     args = parser.parse_args()
-
     run_draw()
