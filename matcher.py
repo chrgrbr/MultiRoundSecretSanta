@@ -3,13 +3,30 @@ from itertools import permutations
 import random
 
 class SecretSantaMatcher:
-    def __init__(self, avoid_bidirectional=False):
-        self.avoid_bidirectional = avoid_bidirectional
-        self.history = defaultdict(set)
-        self.pair_history = set()
+    def __init__(self, prevent_reciprocal_pairs=False):
+        """
+        Initialize the Secret Santa matcher.
+        
+        Args:
+            prevent_reciprocal_pairs (bool): If True, prevents reciprocal gift-giving pairs.
+                For example, if Alex gives to Beth, Beth cannot give to Alex.
+                This can help make the gift exchange more interesting by ensuring
+                wider interaction between participants across rounds.
+        """
+        self.prevent_reciprocal_pairs = prevent_reciprocal_pairs
+        self.history = defaultdict(set)  # Tracks who has given to whom across rounds
+        self.pair_history = set()  # Tracks all giver-receiver pairs for reciprocal prevention
         
     def validate_round(self, participants, exclusions=None):
-        """Validates and returns all valid pairings for a round"""
+        """
+        Validates and returns all valid pairings for a round.
+        
+        A valid pairing must satisfy these rules:
+        - No one gives a gift to themselves
+        - Respects provided exclusions (e.g., family members)
+        - No one gives to the same person twice across rounds
+        - If prevent_reciprocal_pairs is True, prevents mutual gift-giving
+        """
         exclusion_map = defaultdict(set)
         
         if exclusions:
@@ -24,10 +41,15 @@ class SecretSantaMatcher:
             pairing = list(zip(participants, perm))
             
             for giver, receiver in pairing:
-                if (giver == receiver or 
-                    receiver in exclusion_map[giver] or 
-                    receiver in self.history[giver] or
-                    (self.avoid_bidirectional and (receiver, giver) in self.pair_history)):
+                # Check all pairing rules
+                is_invalid = (
+                    giver == receiver or                     # Can't give to self
+                    receiver in exclusion_map[giver] or      # Respect exclusions
+                    receiver in self.history[giver] or       # No repeat receivers across rounds
+                    (self.prevent_reciprocal_pairs and      # Optional: prevent reciprocal pairs
+                     (receiver, giver) in self.pair_history)
+                )
+                if is_invalid:
                     valid_pairing = False
                     break
             

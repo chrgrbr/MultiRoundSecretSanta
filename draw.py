@@ -80,7 +80,8 @@ def run_draw():
     mail_adresses = load_mail_contacts('data/contact_information.json')
     
     # Initialize handlers
-    matcher = SecretSantaMatcher(avoid_bidirectional=True)
+    prevent_reciprocal = config.get('matching', {}).get('prevent_reciprocal_pairs', True)
+    matcher = SecretSantaMatcher(prevent_reciprocal_pairs=prevent_reciprocal)
     email_handler = EmailHandler(config)
     
     # Generate pairings and emails
